@@ -1,0 +1,11 @@
+aiosqlite==0.22.1
+fastapi==0.136.1
+httpx
+mcp==1.27.0
+openai==2.35.1
+pydantic==2.13.4
+pydantic_settings==2.14.0
+uvicorn==0.46.0
+
+aiosmtplib==5.1.0
+psutil

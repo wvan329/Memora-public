@@ -1,0 +1,62 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "@playwright/mcp",
+        "--allow-unrestricted-file-access"
+      ],
+      "black": [
+        "browser_take_screenshot",
+        "browser_file_upload"
+      ],
+      "enabled": false
+    },
+    "next-ai-drawio": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "@next-ai-drawio/mcp-server"
+      ],
+      "enabled": false
+    },
+    "mcp-server-chart": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@antv/mcp-server-chart"],
+      "enabled": true
+    },
+    "mermaid": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "mcp-mermaid"],
+      "enabled": true
+    },
+    "bing-search": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "bing-cn-mcp"
+      ],
+      "enabled": false
+    },
+    "amap": {
+      "type": "streamable",
+      "url": "https://mcp.amap.com/mcp?key={AMAP_API_KEY}",
+      "black": ["maps_ip_location"],
+      "enabled": true
+    },
+    "office-word": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": [
+        "--from",
+        "office-word-mcp-server",
+        "word_mcp_server"
+      ],
+      "enabled": false
+    }
+  }
+}

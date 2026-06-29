@@ -1,0 +1,34 @@
+.env
+ai_chat.db
+reminders.json
+.daemon_logs/
+.playwright-cli/
+.restart_flag
+启动frpc.vbs
+__pycache__/
+*.pyc
+*.log
+mermaid-*.png
+.idea/
+.vscode/
+test.py
+tests/*
+# 前端（只分发 dist/ 构建产物，源码和配置不随 git 分发）
+
+frontend-vue/node_modules/
+frontend-src/
+
+# 本机独有（不随 git 分发）
+local/
+shared/skill/INDEX.md
+
+# Android（源码随 git 分发，构建产物排除）
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+
+# macOS
+.DS_Store
+
+test_line_mode.py

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="clipboard_upload"
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut_upload"
+        android:shortcutShortLabel="@string/shortcut_upload_short"
+        android:shortcutLongLabel="@string/shortcut_upload_long">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.wgk.memora"
+            android:targetClass="com.wgk.memora.ClipboardActionActivity">
+            <extra
+                android:name="action"
+                android:value="upload" />
+        </intent>
+    </shortcut>
+</shortcuts>

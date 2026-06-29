@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="shortcut_upload_short">上传剪贴板</string>
+    <string name="shortcut_upload_long">上传系统剪贴板到电脑</string>
+
+</resources>

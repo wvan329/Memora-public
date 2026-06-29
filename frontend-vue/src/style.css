@@ -1,0 +1,259 @@
+@import "tailwindcss";
+
+/* ── 自定义色值 ── */
+@theme {
+  --color-ai-text: rgb(128, 0, 0);
+  --color-ai-reason: rgb(41, 128, 0);
+  --color-ai-tool: rgb(23, 74, 215);
+
+  --animate-fade-in-up: fadeInUp 0.2s ease-out;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── 全局基础 ── */
+html {
+  font-size: 16px; /* 默认基准，JS 可动态覆盖 */
+}
+html, body, #app {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+/* ── 输入框隐藏滚动条 ── */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* 细滚动条（弹窗等容器内使用） */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}
+.scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 2px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* ── 滚动条样式（tailwind-scrollbar 插件覆盖不够的部分） ── */
+::-webkit-scrollbar {
+  width: 28px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  min-height: 80px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+::-webkit-scrollbar:horizontal {
+  height: 6px;
+}
+::-webkit-scrollbar-thumb:horizontal {
+  border-radius: 3px;
+}
+pre::-webkit-scrollbar {
+  width: 6px;
+  height: 5px;
+}
+pre::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+}
+.think-tools-content pre::-webkit-scrollbar {
+  width: 12px;
+  height: 10px;
+}
+.think-tools-content pre::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+}
+#sidebar ::-webkit-scrollbar {
+  width: 6px;
+}
+#sidebar ::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  min-height: 20px;
+}
+
+/* ── markdown 代码块默认样式 ── */
+.msg-content pre {
+  background: #1e293b;
+  border-radius: 8px;
+  padding: 14px 16px;
+  overflow-x: auto;
+  margin: 8px 0;
+  font-size: 0.875rem;
+  scrollbar-width: none; /* 隐藏 Firefox 滚动条 */
+  line-height: 1.5;
+}
+.msg-content pre::-webkit-scrollbar {
+  display: none; /* 隐藏 Chrome 滚动条 */
+}
+.msg-content pre code {
+  color: #e2e8f0;
+  font-family: "Consolas", "Monaco", "Courier New", monospace;
+}
+.msg-content code {
+  font-size: 0.875rem;
+}
+.msg-content p { margin: 0; }
+.msg-content strong { color: #000; }
+.msg-content a { color: #2563eb; text-decoration: underline; }
+.msg-content ul, .msg-content ol {
+  margin: 0;
+  padding-left: 20px;
+}
+.msg-content ul { list-style: disc; }
+.msg-content ol { list-style: decimal; }
+.msg-content blockquote {
+  border-left: 3px solid #d1d5db;
+  padding-left: 12px;
+  margin: 8px 0;
+  color: #6b7280;
+}
+.msg-content {
+  overflow-x: auto;
+  scrollbar-width: none; /* 隐藏 Firefox 横向滚动条 */
+}
+.msg-content::-webkit-scrollbar {
+  display: none; /* 隐藏 Chrome 横向滚动条 */
+}
+.msg-content table {
+  border-collapse: collapse;
+  margin: 8px 0;
+  width: 100%;
+  min-width: max-content;
+}
+.msg-content th, .msg-content td {
+  border: 1px solid #d1d5db;
+  padding: 6px 10px;
+  text-align: left;
+}
+.msg-content th {
+  background: #f3f4f6;
+  font-weight: 600;
+}
+.msg-content img {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 8px;
+  display: block;
+}
+
+/* ── 暗色模式 ── */
+@media (prefers-color-scheme: dark) {
+  ::-webkit-scrollbar-thumb {
+    background: #4b5563;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #6b7280;
+  }
+  .msg-content blockquote {
+    border-left-color: #4b5563;
+    color: #9ca3af;
+  }
+  .msg-content th, .msg-content td {
+    border-color: #4b5563;
+  }
+  .msg-content th {
+    background: #1f2937;
+  }
+  .msg-content img {
+    border: 1px solid #374151;
+  }
+  .msg-content strong { color: #f8fafc; }
+  .msg-content a { color: #60a5fa; text-decoration: underline; }
+}
+
+/* ── 截断展开系统 ── */
+.truncatable {
+  cursor: pointer;
+  position: relative;
+}
+.think-tools-content .truncatable {
+  cursor: default;
+}
+.user-msg-content {
+  cursor: default;
+}
+.system-msg {
+  cursor: default;
+}
+.truncatable.truncated {
+  overflow: hidden;
+}
+.truncatable.clamp-5.truncated {
+  max-height: 7.5em;
+}
+.truncatable.clamp-4.truncated {
+  max-height: 6em;
+}
+.truncatable:not(.truncated) {
+  max-height: none;
+  overflow: visible;
+}
+
+/* ── 手机端侧边栏叠加模式 ── */
+@media (max-width: 768px) {
+  #sidebar {
+    position: fixed !important;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0 !important;
+    z-index: 50;
+    border-right: none;
+  }
+  #sidebar.mobile-open {
+    width: 260px !important;
+    box-shadow: 4px 0 24px rgba(0,0,0,0.12);
+    border-right: 1px solid #e5e7eb;
+    overflow-x: visible;
+    overflow-y: auto;
+  }
+  #sidebar.mobile-open .sidebar-full {
+    display: flex;
+    flex-direction: column;
+  }
+  #sidebar.mobile-open #autoScrollBtn {
+    display: flex !important;
+  }
+  #sidebar.mobile-open .sidebar-icon-only {
+    display: none;
+  }
+
+  #chatContainer {
+    scrollbar-width: none;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+  #chatContainer::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (prefers-color-scheme: dark) and (max-width: 768px) {
+  #sidebar.mobile-open {
+    border-right-color: #374151;
+    box-shadow: 4px 0 24px rgba(0,0,0,0.4);
+  }
+}

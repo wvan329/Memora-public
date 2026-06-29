@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- APK 下载到 externalFilesDir，FileProvider 需此白名单才能生成 content:// URI -->
+    <external-files-path name="apk" path="." />
+</paths>
